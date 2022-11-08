@@ -17,8 +17,6 @@ namespace Take.Api.GitChallenge.Facades.Facades
         {
             try
             {
-                List<Repository> repos = new List<Repository>();
-                List<Repository> repositories = new List<Repository>();
                 IRestease api = RestEase.RestClient.For<IRestease>(Constants.ENDPOINT_API_GIT);
                 repos = await api.SearchReposAsync();
 
