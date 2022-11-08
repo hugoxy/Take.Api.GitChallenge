@@ -1,0 +1,48 @@
+trigger:
+  - develop
+  - main
+
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Operações/template-take-blip
+      ref: refs/tags/v.1.4.13
+
+variables:
+  - group: Take.Api.GitChallenge-config
+  - name: team
+    value: league
+  - name: skipDecorator
+    value: true
+
+extends:
+  template: template-pipeline.yml@templates
+  parameters:
+    packagename: Take.Api.GitChallenge
+    type: dotnet
+    to: kubernetes
+    contextpath: 'Api'
+    stages:
+      - name: staging
+        condition:
+          and(or(ne(variables['build.sourceBranchName'], 'master'),
+          ne(variables['build.sourceBranchName'],
+          'main')),ne(variables['Build.Reason'], 'PullRequest'))
+        dependsOn: build
+        environment: staging
+        variables:
+          - Take.Api.GitChallenge-staging
+        ServiceConnection: 'AKS BOT BETA-STAGING-$(System.TeamProject)'
+      - name: production
+        condition:
+          and(or(eq(variables['build.sourceBranchName'], 'master'),
+          eq(variables['build.sourceBranchName'],
+          'main')),ne(variables['Build.Reason'], 'PullRequest'))
+        dependsOn: staging
+        environment: production
+        shouldAddAlarm: true
+        variables:
+          - Take.Api.GitChallenge-production
+          - Nagios XI Take NE Credentials
+        ServiceConnection: 'AKS BOT PROD-$(System.TeamProject)'

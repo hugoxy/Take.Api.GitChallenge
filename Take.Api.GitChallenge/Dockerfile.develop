@@ -1,0 +1,20 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+ARG BUILD_CONFIGURATION=Debug
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+EXPOSE 80
+
+WORKDIR /src
+COPY ["Take.Api.GitChallenge.Facades/Take.Api.GitChallenge.Facades.csproj", "Take.Api.GitChallenge.Facades/"]
+COPY ["Take.Api.GitChallenge.Models/Take.Api.GitChallenge.Models.csproj", "Take.Api.GitChallenge.Models/"]
+COPY ["Take.Api.GitChallenge.Services/Take.Api.GitChallenge.Services.csproj", "Take.Api.GitChallenge.Services/"]
+COPY ["Take.Api.GitChallenge/Take.Api.GitChallenge.csproj", "Take.Api.GitChallenge/"]
+
+RUN dotnet restore "Take.Api.GitChallenge/Take.Api.GitChallenge.csproj"
+COPY . .
+WORKDIR "/src/Take.Api.GitChallenge"
+RUN dotnet build --no-restore "Take.Api.GitChallenge.csproj" -c $BUILD_CONFIGURATION
+
+RUN echo "exec dotnet run --no-build --no-launch-profile -c $BUILD_CONFIGURATION --" > /entrypoint.sh
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
