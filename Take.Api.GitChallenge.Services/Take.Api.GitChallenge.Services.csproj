@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <ProjectGuid>48420de6-3105-40a6-92c0-b96d5128e6d5</ProjectGuid>
+    <SonarQubeTestProject>false</SonarQubeTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="RestEase" Version="1.4.10" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Take.Api.GitChallenge.Models\Take.Api.GitChallenge.Models.csproj" />
+  </ItemGroup>
+</Project>
