@@ -11,14 +11,15 @@ using Take.Api.GitChallenge.Facades.Services;
 
 namespace Take.Api.GitChallenge.Facades.Facades
 {
-    class ReposFacades : IRepos
+    internal class ReposFacades : IRepos
     {
         public async Task<List<Repository>> SearchReposAsync()
         {
             try
             {
                 IRestease api = RestEase.RestClient.For<IRestease>(Constants.ENDPOINT_API_GIT);
-                repos = await api.SearchReposAsync();
+                List<Repository>repos = await api.SearchReposAsync();
+                List<Repository> repositories = new List<Repository>();
 
                 for (int i = 0; i < Constants.NUMBER_OBJECTS_SCANNED; i++)
                 {

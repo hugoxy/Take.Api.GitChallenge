@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+
 using RestEase;
 
 using Take.Api.GitChallenge.Models;
@@ -13,6 +14,5 @@ namespace Take.Api.GitChallenge.Facades.Services
     {
         [Get("/orgs/takenet/repos")]
         Task<List<Repository>> SearchReposAsync();
-
     }
 }
