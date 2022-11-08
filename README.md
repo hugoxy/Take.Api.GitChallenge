@@ -1,16 +1,9 @@
-﻿# Guidelines on what's left to do
-### (you can delete this file after doing everything)
+﻿# Take.Api.GitChallenge
+### 
 
-1. Get BLiP's configurations (AccessKey and Identifier) from the Bot @ https://portal.blip.ai/#/application/detail/BOT_IDENTIFIER/configurations/apikey
-    1. You need to switch to SDK to get those. Switch back to Builder when you're done
-    2. Place them on the correct properties on `appsettings.json`
-    ```json
-	...
-    "BlipBotSettings": {
-      "Identifier": "botBlipIdentifier",
-      "AccessKey": "botBlipAccessKey"
-    }
-	...
+ 1. Objetivo
+    ```
+        Recuperar reposititorios Github da linguagem C# consumindo API do Github, seguindo os padrões Take de construção para APIs intermediarias.
     ```
     
 2. **[If Using SEQ]** Place SEQ's url on the correct property field on `appsettings.json`
